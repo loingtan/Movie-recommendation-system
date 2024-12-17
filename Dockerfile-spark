@@ -1,0 +1,13 @@
+FROM bitnami/spark:3.5.0
+USER root
+
+RUN apt-get clean && \
+    apt-get update && \
+    apt-get install -y python3-pip && \
+    pip3 install --no-cache-dir notebook pyspark pandas matplotlib elasticsearch
+
+ENV CONNECTOR_VERSION=8.10.2
+ADD https://repo1.maven.org/maven2/org/elasticsearch/elasticsearch-spark-30_2.12/${CONNECTOR_VERSION}/elasticsearch-spark-30_2.12-${CONNECTOR_VERSION}.jar /opt/spark/jars/
+
+EXPOSE 8888
+USER 1001
