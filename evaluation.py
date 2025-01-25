@@ -14,12 +14,10 @@ def compute_diversity(recommendations):
                       for user, items in recommendations.items()}
     diversity_sum = 0
     total_users = len(user_item_sets)
-
     for user1, items1 in user_item_sets.items():
         for user2, items2 in user_item_sets.items():
             if user1 != user2:
                 diversity_sum += jaccard_similarity(items1, items2)
-
     diversity = diversity_sum / (total_users * (total_users - 1))
     return diversity
 
